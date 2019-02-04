@@ -1,6 +1,6 @@
 import pandas as pd
 import strdif
-import os
+import os, sys
 
 OUTPUT_FILENAME = 'consolidated.csv'
 CACHED_CONSOLIDATED_FILENAME = 'cached_' + OUTPUT_FILENAME
@@ -71,7 +71,11 @@ def apply_name_mapping(mapping, data):
             data.loc[c[0], 'name'] = m["to"]
     return data
 
-data = pd.read_csv(INPUT_FILENAME)
+if (len(sys.argv) != 2):
+    print('usage: python cleanup.py <input file name>')
+    exit(-1)
+
+data = pd.read_csv(sys.argv[1])
 data = data.rename(columns={'Name':'name', 'Home Country or Country Code':'country', 'Major/Program or Major Code':'major'})
 
 # Propagate 'No Data's all the way down
