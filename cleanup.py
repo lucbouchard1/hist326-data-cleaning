@@ -8,10 +8,12 @@ INPUT_FILENAME = 'hist326_combined.csv'
 
 def group(data):
     def quarter_group_func(data):
-        if (data.str.contains('No Data', case=False, regex=False).any()):
-            return 'No Data'
+        if (pd.isnull(data).all()):
+            return ''
         if (data.str.contains('X', case=False, regex=False).any()):
             return 'X'
+        if (data.str.contains('No Data', case=False, regex=False).any()):
+            return 'No Data'
         return ''
 
     def choose(data):
