@@ -3,5 +3,5 @@
 How to run:
 
 ```
-python cleanup.py <csv file name>
+python cleanup.py hist326_master.csv
 ```
